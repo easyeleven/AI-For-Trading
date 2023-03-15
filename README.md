@@ -3,7 +3,6 @@
 ## Contents
 📈 This repo contains detailed notes and multiple projects implemented in Python related to AI and Finance such as portfolio optimization, researching alpha factors, leveraging Alphalens and backtesting your strategy via Zipline.
 
-* [Term 1](https://github.com/notaconduit/AI-for-Trading/tree/master/Term%201)
   * [Theorey and Quizes](https://github.com/hnotaconduit/AI-for-Trading/tree/master/Term%201/Theorey%20%26%20Quizes)
       * [Stock Prices](https://github.com/notaconduit/AI-for-Trading/tree/master/Term%201/Theorey%20%26%20Quizes/01.%20Stock%20Prices)
       * [Quant Workflow](https://github.com/notaconduit/AI-for-Trading/tree/master/Term%201/Theorey%20%26%20Quizes/02.%20Quant%20Workflow)
@@ -27,9 +26,6 @@
       * [Project 2: Breakout Strategy](https://github.com/notaconduit/AI-for-Trading/tree/master/Term%201/Projects/Project%20-%202%20-%20Breakout%20%20Strategy)
       * [Project 3: Smart Beta and Portfolio Optimization](https://github.com/notaconduit/AI-for-Trading/tree/master/Term%201/Projects/Project%20-%203%20-%20Smart%20Beta%20and%20Portfolio%20Optimization)
       * [Project 4 : Alpha Research and Factor Modelling](https://github.com/notaconduit/AI-for-Trading/tree/master/Term%201/Projects/Project%20-%204%20-%20Alpha%20Research%20and%20Factor%20Modelling)
-
-* [Term 2](https://github.com/notaconduit/AI-for-Trading/tree/master/Term%202/Projects)
-  * [Projects](https://github.com/notaconduit/AI-for-Trading/tree/master/Term%202/Projects)
        * [Project 5: NLP on Financial 10-K Statements](https://github.com/notaconduit/AI-for-Trading/tree/master/Term%202/Projects/Project%20-%205%20-%20NLP%20on%20Financial%20Statements)
        * [Project 6: Sentiment Analysis of Financial Statements](https://github.com/notaconduit/AI-for-Trading/tree/master/Term%202/Projects/Project%20-%206%20-%20Sentiment%20Analysis%20on%20Financial%20Statements)
        * [Project 7: Combining Signals for Enhanced Alpha](https://github.com/notaconduit/AI-for-Trading/tree/master/Term%202/Projects/Project%20-%207%20-%20Combining%20Signals%20for%20Enhanced%20Alpha)
