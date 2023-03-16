@@ -1,4 +1,4 @@
-# Latent Dirichlet Allocation
+# Latent Dirichlet Allocation.
 
 - [Latent Dirichlet Allocation](#latent-dirichlet-allocation)
   * [Overview](#overview)
