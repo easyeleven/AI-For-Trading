@@ -22,12 +22,40 @@
       * [Alpha Factor Research Methods](https://github.com/notaconduit/AI-for-Trading/tree/master/Term%201/Theorey%20%26%20Quizes/16.%20Alpha%20Factor%20Research%20Methods)
       
   * [Projects](https://github.com/notaconduit/AI-for-Trading/tree/master/Term%201/Projects)
+  ### Project Details:
+#### 1. Basic Quantitative Trading - Trading with Momentum
+0. import pandas, numpy, helper
+1. Load Quatemedia EOD Price Data
+2. Resample to Month-end `close_price.resample('M').last()`
+3. Compute Log Return
+4. Shift Returns `returns.shift(n)`
+5. Generate Trading Signal
+   * Strategy tried:
+        > For each month-end observation period, rank the stocks by previous returns, from the highest to the lowest. Select the top performing stocks for the long portfolio, and the bottom performing stocks for the short portfolio.
+   * ```
+      for i, row in prev_price:
+        top_stock.loc[i] = row.nlargest(top_n)
+     ```
+6. Projected Return `portfolio_returns = (lookahead_returns * (df_long - df_short))/n_stocks`
+7. Statistical Test
+   * Annualized Rate of Return `(np.exp(portfolio_returns.T.sum().dropna().mean()*12) - 1) * 100`
+   * T-Test
+     * Null hypothesis (H0): Actual mean return from the signal is zero.
+     * When p value < 0.05, the null hypothesis is rejected
+     * One-sample, one-sided t-test `(t_value, p_value) = scipy.stats.ttest_1samp(portfolio_return, hypothesis)`
       * [Project 1: Momentum Trading strategy](https://github.com/notaconduit/AI-for-Trading/tree/master/Term%201/Projects/Project%20-%201%20-%20Trading%20with%20Momentum)
+      
       * [Project 2: Breakout Strategy](https://github.com/notaconduit/AI-for-Trading/tree/master/Term%201/Projects/Project%20-%202%20-%20Breakout%20%20Strategy)
+      
       * [Project 3: Smart Beta and Portfolio Optimization](https://github.com/notaconduit/AI-for-Trading/tree/master/Term%201/Projects/Project%20-%203%20-%20Smart%20Beta%20and%20Portfolio%20Optimization)
+      
       * [Project 4 : Alpha Research and Factor Modelling](https://github.com/notaconduit/AI-for-Trading/tree/master/Term%201/Projects/Project%20-%204%20-%20Alpha%20Research%20and%20Factor%20Modelling)
+      
        * [Project 5: NLP on Financial 10-K Statements](https://github.com/notaconduit/AI-for-Trading/tree/master/Term%202/Projects/Project%20-%205%20-%20NLP%20on%20Financial%20Statements)
+       
        * [Project 6: Sentiment Analysis of Financial Statements](https://github.com/notaconduit/AI-for-Trading/tree/master/Term%202/Projects/Project%20-%206%20-%20Sentiment%20Analysis%20on%20Financial%20Statements)
+       
        * [Project 7: Combining Signals for Enhanced Alpha](https://github.com/notaconduit/AI-for-Trading/tree/master/Term%202/Projects/Project%20-%207%20-%20Combining%20Signals%20for%20Enhanced%20Alpha)
+       
        * [Project 8: Backtesting](https://github.com/notaconduit/AI-for-Trading/tree/master/Term%202/Projects/Project%20-%208%20-%20Backtesting)
       
