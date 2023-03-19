@@ -1,4 +1,4 @@
-# Breakout Strategy
+# Advanced Quantitative Trading - Breakout Strategy
 
 0. import pandas, numpy, helper
 1. Load Quatemedia EOD Price Data
