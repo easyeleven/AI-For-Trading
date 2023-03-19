@@ -1,3 +1,5 @@
+## Smart Beta and Portfolio Optimization
+
 1. Load large dollar volume stocks from quotemedia
 ##### Smart Beta by alternative weighting - dividend yield to choose the portfolio weight
 2. Calculate Index Weights (dollar volume weights)
