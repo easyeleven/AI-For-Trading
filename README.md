@@ -22,8 +22,8 @@
       * [Alpha Factor Research Methods](https://github.com/notaconduit/AI-for-Trading/tree/master/Term%201/Theorey%20%26%20Quizes/16.%20Alpha%20Factor%20Research%20Methods)
       
   * [Projects](https://github.com/notaconduit/AI-for-Trading/tree/master/Term%201/Projects)
-  ### Project Details:
-#### 1. Basic Quantitative Trading - Trading with Momentum
+
+   * [Project 1: Momentum Trading strategy](https://github.com/notaconduit/AI-for-Trading/tree/master/Term%201/Projects/Project%20-%201%20-%20Trading%20with%20Momentum)
 0. import pandas, numpy, helper
 1. Load Quatemedia EOD Price Data
 2. Resample to Month-end `close_price.resample('M').last()`
@@ -43,7 +43,7 @@
      * Null hypothesis (H0): Actual mean return from the signal is zero.
      * When p value < 0.05, the null hypothesis is rejected
      * One-sample, one-sided t-test `(t_value, p_value) = scipy.stats.ttest_1samp(portfolio_return, hypothesis)`
-      * [Project 1: Momentum Trading strategy](https://github.com/notaconduit/AI-for-Trading/tree/master/Term%201/Projects/Project%20-%201%20-%20Trading%20with%20Momentum)
+      
       
       * [Project 2: Breakout Strategy](https://github.com/notaconduit/AI-for-Trading/tree/master/Term%201/Projects/Project%20-%202%20-%20Breakout%20%20Strategy)
       
