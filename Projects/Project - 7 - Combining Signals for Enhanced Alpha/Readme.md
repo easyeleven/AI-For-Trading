@@ -1,4 +1,4 @@
-## COmbining Signals for Enhanced Alpha
+## Combining Signals for Enhanced Alpha
 
 0. import numpy, pandas, tqdm, matplotlib.pyplot
 1. Data Pipeline
