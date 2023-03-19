@@ -1,4 +1,4 @@
-## Project Discription
+# Advanced NLP with Deep Learning - Analizing Stock Sentiment from Twits (requiring GPU)
 
 1. import nltk, numpy, pandas, pickle, pprint, tqdm.tqdm, bs4.BeautifulSoup, re
     * `nltk.download('stopwords'), nltk.download('wordnet')`
