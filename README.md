@@ -3,7 +3,7 @@
 ## Contents
 📈 This repo contains detailed notes and multiple projects implemented in Python related to AI and Finance such as portfolio optimization, researching alpha factors, leveraging Alphalens and backtesting your strategy via Zipline.
 
-  * [Glossary](https://github.com/hnotaconduit/AI-for-Trading/tree/master/Term%201/Theorey%20%26%20Quizes)
+  * [Theory and Quizzes](https://github.com/hnotaconduit/AI-for-Trading/tree/master/Term%201/Theorey%20%26%20Quizes)
       * [Stock Prices](https://github.com/wayforwardmachine/AI-For-Trading/tree/update-script/Theorey%20%26%20Quizes/01.%20Stock%20Prices)
       * [Quant Workflow](https://github.com/notaconduit/AI-for-Trading/tree/master/Term%201/Theorey%20%26%20Quizes/02.%20Quant%20Workflow)
       * [Regression](https://github.com/notaconduit/AI-for-Trading/tree/master/Term%201/Theorey%20%26%20Quizes/03.%20Regression)
