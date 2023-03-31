@@ -37,5 +37,7 @@
        
        * [Project 7: Combining Signals for Enhanced Alpha](https://github.com/wayforwardmachine/AI-For-Trading/tree/main/Projects/Project%20-%207%20-%20Combining%20Signals%20for%20Enhanced%20Alpha)
        
-       * [Project 8: Backtesting](https://github.com/wayforwardmachine/AI-For-Trading/tree/main/Projects/Project%20-%208%20-%20Backtesting)
+       * [Project 8: Backtesting](https://github.com/notaconduit/AI-for-Trading/tree/master/Term%202/Projects/Project%20-%208%20-%20Backtesting)
+       
+       * [Project 9: Simple MA crossover strategy]()
       
