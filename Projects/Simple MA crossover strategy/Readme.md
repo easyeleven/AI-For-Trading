@@ -1,5 +1,4 @@
-
-- # Simple Moving Average Strategy Project
+# Simple Moving Average Strategy Project
 
 This project involves building a simple trading strategy using Python and a PostgreSQL database. The strategy used in this project is the simple moving average crossover strategy.
 ## Setup
