@@ -40,3 +40,5 @@
        * [Project 8: Combining Signals for Enhanced Alpha](https://github.com/notabombe/AI-For-Trading/tree/update-script/Projects/Project%20-%208%20-%20Combining%20Signals%20for%20Enhanced%20Alpha)
        
        * [Project 9: Backtesting](https://github.com/notabombe/AI-For-Trading/tree/update-script/Projects/Project%20-%209%20-%20Backtesting)
+       
+       * [Project 10: Cryptocurrency price prediction using LSTM](https://github.com/notabombe/AI-For-Trading/tree/update-script/Projects/Project%20-%2010%20-%20Cryptocurrency%20price%20prediction%20using%20LSTM)
