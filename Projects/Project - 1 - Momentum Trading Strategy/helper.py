@@ -39,8 +39,7 @@ def download_quandl_dataset(quandl_api_key, database, dataset, save_path, column
     :param start_date: The rows to save that are older than this date
     :param end_date: The rows to save that are younger than this date
     """
-    scrape_url = 'https://www.quandl.com/api/v3/datatables/{}/{}?qopts.export=true&api_key={}'\
-        .format(database, dataset, quandl_api_key)
+    scrape_url = f'https://www.quandl.com/api/v3/datatables/{database}/{dataset}?qopts.export=true&api_key={quandl_api_key}'
     scrape_request = requests.get(scrape_url)
     bulk_download_url = scrape_request.json()['datatable_bulk_download']['file']['link']
 
@@ -70,9 +69,9 @@ def download_quandl_dataset(quandl_api_key, database, dataset, save_path, column
             #   We're assuming that Quandl will always give us the data in a single csv file.
             #   If it's different, we want to throw an error.
             csv_files = glob.glob(os.path.join(tmp_dir, '*.csv'))
-            assert len(csv_files) == 1,\
-                'Bulk download of Quandl Wiki data failed. Wrong number of csv files found. Found {} file(s).'\
-                    .format(len(csv_files))
+            assert (
+                len(csv_files) == 1
+            ), f'Bulk download of Quandl Wiki data failed. Wrong number of csv files found. Found {len(csv_files)} file(s).'
             tmp_csv_file = csv_files[0]
 
             tmp_df = pd.read_csv(tmp_csv_file)

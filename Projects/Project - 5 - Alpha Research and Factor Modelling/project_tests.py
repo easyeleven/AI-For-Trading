@@ -61,11 +61,9 @@ def test_fit_pca(fn):
         assert_structure(fn_return_value.components_, fn_correct_values['PCA.components_'], 'PCA.components_')
 
         if not does_data_match(fn_return_value.components_, fn_correct_values['PCA.components_']):
-            raise Exception('Test Failure: PCA not fitted correctly\n\n'
-                            'PCA.components_:\n'
-                            '{}\n\n'
-                            'Expected PCA.components_:\n'
-                            '{}'.format(fn_return_value.components_, fn_correct_values['PCA.components_']))
+            raise Exception(
+                f"Test Failure: PCA not fitted correctly\n\nPCA.components_:\n{fn_return_value.components_}\n\nExpected PCA.components_:\n{fn_correct_values['PCA.components_']}"
+            )
 
 
 @project_test
@@ -273,15 +271,16 @@ def test_mean_reversion_5day_sector_neutral(fn):
                 [column_name]))])
 
     print('Running Integration Test on pipeline:')
-    print('> start_dat = pd.Timestamp(\'{}\', tz=\'utc\')'.format(start_date_str))
-    print('> end_date = pd.Timestamp(\'{}\', tz=\'utc\')'.format(end_date_str))
-    print('> universe = AverageDollarVolume(window_length={}).top({})'.format(
-        universe_window_length, universe_asset_count))
-    print('> factor = {}('.format(fn.__name__))
-    print('    window_length={},'.format(fn_inputs['window_length']))
+    print(f"> start_dat = pd.Timestamp(\'{start_date_str}\', tz=\'utc\')")
+    print(f"> end_date = pd.Timestamp(\'{end_date_str}\', tz=\'utc\')")
+    print(
+        f'> universe = AverageDollarVolume(window_length={universe_window_length}).top({universe_asset_count})'
+    )
+    print(f'> factor = {fn.__name__}(')
+    print(f"    window_length={fn_inputs['window_length']},")
     print('    universe=universe,')
     print('    sector=project_helper.Sector())')
-    print('> pipeline.add(factor, \'{}\')'.format(column_name))
+    print(f"> pipeline.add(factor, \'{column_name}\')")
     print('> engine.run_pipeline(pipeline, start_dat, end_date)')
     print('')
 
@@ -324,15 +323,16 @@ def test_mean_reversion_5day_sector_neutral_smoothed(fn):
                 [column_name]))])
 
     print('Running Integration Test on pipeline:')
-    print('> start_dat = pd.Timestamp(\'{}\', tz=\'utc\')'.format(start_date_str))
-    print('> end_date = pd.Timestamp(\'{}\', tz=\'utc\')'.format(end_date_str))
-    print('> universe = AverageDollarVolume(window_length={}).top({})'.format(
-        universe_window_length, universe_asset_count))
-    print('> factor = {}('.format(fn.__name__))
-    print('    window_length={},'.format(fn_inputs['window_length']))
+    print(f"> start_dat = pd.Timestamp(\'{start_date_str}\', tz=\'utc\')")
+    print(f"> end_date = pd.Timestamp(\'{end_date_str}\', tz=\'utc\')")
+    print(
+        f'> universe = AverageDollarVolume(window_length={universe_window_length}).top({universe_asset_count})'
+    )
+    print(f'> factor = {fn.__name__}(')
+    print(f"    window_length={fn_inputs['window_length']},")
     print('    universe=universe,')
     print('    sector=project_helper.Sector())')
-    print('> pipeline.add(factor, \'{}\')'.format(column_name))
+    print(f"> pipeline.add(factor, \'{column_name}\')")
     print('> engine.run_pipeline(pipeline, start_dat, end_date)')
     print('')
 
@@ -343,7 +343,7 @@ def test_mean_reversion_5day_sector_neutral_smoothed(fn):
 @project_test
 def test_sharpe_ratio(fn):
     dates = generate_random_dates(4)
-    factor_names = ['Factor {}'.format(i) for i in range(3)]
+    factor_names = [f'Factor {i}' for i in range(3)]
 
     fn_inputs = {
         'factor_returns': pd.DataFrame(

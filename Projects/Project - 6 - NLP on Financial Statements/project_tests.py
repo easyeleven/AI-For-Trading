@@ -11,9 +11,7 @@ def test_get_documents(fn):
     # Test 1
     doc = '\nThis is inside the document\n' \
           'This is the text that should be copied'
-    text = 'This is before the test document<DOCUMENT>{}</DOCUMENT>\n' \
-           'This is after the document\n' \
-           'This shouldn\t be included.'.format(doc)
+    text = f'This is before the test document<DOCUMENT>{doc}</DOCUMENT>\nThis is after the document\nThis shouldn\t be included.'
 
     fn_inputs = {
         'text': text}

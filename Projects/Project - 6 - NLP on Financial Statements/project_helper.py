@@ -23,7 +23,7 @@ def print_ten_k_data(ten_k_data, fields, field_length_limit=50):
 
     print('[')
     for ten_k in ten_k_data:
-        print_statement = '{}{{'.format(indentation)
+        print_statement = f'{indentation}{{'
         for field in fields:
             value = str(ten_k[field])
 
@@ -31,13 +31,13 @@ def print_ten_k_data(ten_k_data, fields, field_length_limit=50):
             if isinstance(value, str):
                 value_str = '\'{}\''.format(value.replace('\n', '\\n'))
             else:
-                value_str = str(value)
+                value_str = value
 
             # Cut off the string if it gets too long
             if len(value_str) > field_length_limit:
-                value_str = value_str[:field_length_limit] + '...'
+                value_str = f'{value_str[:field_length_limit]}...'
 
-            print_statement += '\n{}{}: {}'.format(indentation * 2, field, value_str)
+            print_statement += f'\n{indentation * 2}{field}: {value_str}'
 
         print_statement += '},'
         print(print_statement)

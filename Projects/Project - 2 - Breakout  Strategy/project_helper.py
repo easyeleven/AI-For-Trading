@@ -124,14 +124,17 @@ def plot_lookahead_prices(prices, lookahead_price_list, title):
         .range_to(Color(helper.color_scheme['high_value']), len(lookahead_price_list))
 
     traces = [_generate_stock_trace(prices)]
-    for (lookahead_prices, lookahead_days), color in zip(lookahead_price_list, colors):
-        traces.append(
-            go.Scatter(
-                x=lookahead_prices.index,
-                y=lookahead_prices,
-                name='{} Day Lookahead'.format(lookahead_days),
-                line={'color': str(color)}))
-
+    traces.extend(
+        go.Scatter(
+            x=lookahead_prices.index,
+            y=lookahead_prices,
+            name=f'{lookahead_days} Day Lookahead',
+            line={'color': str(color)},
+        )
+        for (lookahead_prices, lookahead_days), color in zip(
+            lookahead_price_list, colors
+        )
+    )
     offline_py.iplot({'data': traces, 'layout': layout}, config=config)
 
 
@@ -149,15 +152,18 @@ def plot_price_returns(prices, lookahead_returns_list, title):
         .range_to(Color(helper.color_scheme['high_value']), len(lookahead_returns_list))
 
     traces = [_generate_stock_trace(prices)]
-    for (lookahead_returns, lookahead_days), color in zip(lookahead_returns_list, colors):
-        traces.append(
-            go.Scatter(
-                x=lookahead_returns.index,
-                y=lookahead_returns,
-                name='{} Day Lookahead'.format(lookahead_days),
-                line={'color': str(color)},
-                yaxis='y2'))
-
+    traces.extend(
+        go.Scatter(
+            x=lookahead_returns.index,
+            y=lookahead_returns,
+            name=f'{lookahead_days} Day Lookahead',
+            line={'color': str(color)},
+            yaxis='y2',
+        )
+        for (lookahead_returns, lookahead_days), color in zip(
+            lookahead_returns_list, colors
+        )
+    )
     offline_py.iplot({'data': traces, 'layout': layout}, config=config)
 
 
@@ -177,11 +183,12 @@ def plot_signal_returns(prices, signal_return_list, titles):
     for (signal_return, signal, lookahead_days), color, title in zip(signal_return_list, colors, titles):
         non_zero_signals = signal_return[signal_return != 0]
         signal_return_trace = go.Scatter(
-                x=non_zero_signals.index,
-                y=non_zero_signals,
-                name='{} Day Lookahead'.format(lookahead_days),
-                line={'color': str(color)},
-                yaxis='y2')
+            x=non_zero_signals.index,
+            y=non_zero_signals,
+            name=f'{lookahead_days} Day Lookahead',
+            line={'color': str(color)},
+            yaxis='y2',
+        )
 
         buy_annotations = _generate_buy_annotations(prices, signal)
         sell_annotations = _generate_sell_annotations(prices, signal)
@@ -208,8 +215,8 @@ def plot_signal_histograms(signal_list, title, subplot_titles):
         filtered_series = signal_series[signal_series != 0].dropna()
         trace = go.Histogram(x=filtered_series, marker={'color': str(color)})
         fig.append_trace(trace, 1, series_i)
-        fig['layout']['xaxis{}'.format(series_i)].update(range=x_range)
-        fig['layout']['yaxis{}'.format(series_i)].update(range=y_range)
+        fig['layout'][f'xaxis{series_i}'].update(range=x_range)
+        fig['layout'][f'yaxis{series_i}'].update(range=y_range)
 
     offline_py.iplot(fig, config=config)
 
@@ -240,8 +247,8 @@ def plot_signal_to_normal_histograms(signal_list, title, subplot_titles):
             showlegend=False)
         fig.append_trace(filtered_series_trace, 1, series_i)
         fig.append_trace(normal_trace, 1, series_i)
-        fig['layout']['xaxis{}'.format(series_i)].update(range=x_range)
-        fig['layout']['yaxis{}'.format(series_i)].update(range=y_range)
+        fig['layout'][f'xaxis{series_i}'].update(range=x_range)
+        fig['layout'][f'yaxis{series_i}'].update(range=y_range)
 
     # Show legened
     fig['data'][0]['showlegend'] = True

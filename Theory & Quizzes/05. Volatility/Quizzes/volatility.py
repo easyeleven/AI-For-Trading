@@ -29,7 +29,7 @@ def get_most_volatile(prices):
 def test_run(filename='prices.csv'):
     """Test run get_most_volatile() with stock prices from a file."""
     prices = pd.read_csv(filename, parse_dates=['date'])
-    print("Most volatile stock: {}".format(get_most_volatile(prices)))
+    print(f"Most volatile stock: {get_most_volatile(prices)}")
 
 
 if __name__ == '__main__':

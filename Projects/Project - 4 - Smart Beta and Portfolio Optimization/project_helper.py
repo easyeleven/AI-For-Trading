@@ -17,12 +17,21 @@ def _generate_hover_text(x_text, y_text, z_values, x_label, y_label, z_label):
     padding_len = np.full(3, max(len(x_label), len(y_label), len(z_label))) - \
                   [len(x_label), len(y_label), len(z_label)]
 
-    # Additional padding added to ticker and date to align
-    hover_text = x_label + ':  ' + padding_len[0] * ' ' + x_hover_text_values + '<br>' + \
-                 y_label + ':  ' + padding_len[1] * ' ' + y_hover_text_values.T + '<br>' + \
-                 z_label + ': ' + padding_len[2] * ' ' + float_to_str(z_values)
-
-    return hover_text
+    return (
+        f'{x_label}:  '
+        + padding_len[0] * ' '
+        + x_hover_text_values
+        + '<br>'
+        + y_label
+        + ':  '
+        + padding_len[1] * ' '
+        + y_hover_text_values.T
+        + '<br>'
+        + z_label
+        + ': '
+        + padding_len[2] * ' '
+        + float_to_str(z_values)
+    )
 
 
 def _generate_heatmap_trace(df, x_label, y_label, z_label, scale_min, scale_max):
@@ -122,7 +131,7 @@ def print_dataframe(df, n_rows=10, n_columns=3):
 
 def plot_weights(weights, title):
     config = helper.generate_config()
-    graph_path = 'graphs/{}.html'.format(_sanatize_string(title))
+    graph_path = f'graphs/{_sanatize_string(title)}.html'
     trace = _generate_heatmap_trace(weights.sort_index(axis=1, ascending=False), 'Date', 'Ticker', 'Weight', 0.0, 0.2)
     layout = go.Layout(
         title=title,
@@ -131,13 +140,16 @@ def plot_weights(weights, title):
 
     fig = go.Figure(data=[trace], layout=layout)
     offline_py.plot(fig, config=config, filename=graph_path, auto_open=False)
-    display(HTML('The graph for {} is too large. You can view it <a href="{}" target="_blank">here</a>.'
-                 .format(title, graph_path)))
+    display(
+        HTML(
+            f'The graph for {title} is too large. You can view it <a href="{graph_path}" target="_blank">here</a>.'
+        )
+    )
 
 
 def plot_returns(returns, title):
     config = helper.generate_config()
-    graph_path = 'graphs/{}.html'.format(_sanatize_string(title))
+    graph_path = f'graphs/{_sanatize_string(title)}.html'
     trace = _generate_heatmap_trace(returns.sort_index(axis=1, ascending=False), 'Date', 'Ticker', 'Weight', -0.3, 0.3)
     layout = go.Layout(
         title=title,
@@ -146,13 +158,16 @@ def plot_returns(returns, title):
 
     fig = go.Figure(data=[trace], layout=layout)
     offline_py.plot(fig, config=config, filename=graph_path, auto_open=False)
-    display(HTML('The graph for {} is too large. You can view it <a href="{}" target="_blank">here</a>.'
-                 .format(title, graph_path)))
+    display(
+        HTML(
+            f'The graph for {title} is too large. You can view it <a href="{graph_path}" target="_blank">here</a>.'
+        )
+    )
 
 
 def plot_covariance_returns_correlation(correlation, title):
     config = helper.generate_config()
-    graph_path = 'graphs/{}.html'.format(_sanatize_string(title))
+    graph_path = f'graphs/{_sanatize_string(title)}.html'
     data = []
 
     dendro_top = ff.create_dendrogram(correlation, orientation='bottom')
@@ -212,8 +227,11 @@ def plot_covariance_returns_correlation(correlation, title):
     figure['layout']['yaxis2'].update(xaxis2_layout)
 
     offline_py.plot(figure, config=config, filename=graph_path, auto_open=False)
-    display(HTML('The graph for {} is too large. You can view it <a href="{}" target="_blank">here</a>.'
-                 .format(title, graph_path)))
+    display(
+        HTML(
+            f'The graph for {title} is too large. You can view it <a href="{graph_path}" target="_blank">here</a>.'
+        )
+    )
 
 
 def plot_xty(xty, title):

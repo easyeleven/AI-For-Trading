@@ -43,12 +43,11 @@ class Sector(Classifier):
 def build_pipeline_engine(bundle_data, trading_calendar):
     pricing_loader = PricingLoader(bundle_data)
 
-    engine = SimplePipelineEngine(
+    return SimplePipelineEngine(
         get_loader=pricing_loader.get_loader,
         calendar=trading_calendar.all_sessions,
-        asset_finder=bundle_data.asset_finder)
-
-    return engine
+        asset_finder=bundle_data.asset_finder,
+    )
 
 
 def get_factor_exposures(factor_betas, weights):

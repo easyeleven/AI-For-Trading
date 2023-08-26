@@ -11,19 +11,18 @@ pd.options.display.float_format = '{:.8f}'.format
 
 def _generate_output_error_msg(fn_name, fn_inputs, fn_outputs, fn_expected_outputs):
     formatted_inputs = []
-    formatted_outputs = []
-    formatted_expected_outputs = []
-
-    for input_name, input_value in fn_inputs.items():
-        formatted_outputs.append('INPUT {}:\n{}\n'.format(
-            input_name, str(input_value)))
-    for output_name, output_value in fn_outputs.items():
-        formatted_outputs.append('OUTPUT {}:\n{}\n'.format(
-            output_name, str(output_value)))
-    for expected_output_name, expected_output_value in fn_expected_outputs.items():
-        formatted_expected_outputs.append('EXPECTED OUTPUT FOR {}:\n{}\n'.format(
-            expected_output_name, str(expected_output_value)))
-
+    formatted_outputs = [
+        f'INPUT {input_name}:\n{str(input_value)}\n'
+        for input_name, input_value in fn_inputs.items()
+    ]
+    formatted_outputs.extend(
+        f'OUTPUT {output_name}:\n{str(output_value)}\n'
+        for output_name, output_value in fn_outputs.items()
+    )
+    formatted_expected_outputs = [
+        f'EXPECTED OUTPUT FOR {expected_output_name}:\n{str(expected_output_value)}\n'
+        for expected_output_name, expected_output_value in fn_expected_outputs.items()
+    ]
     return 'Wrong value for {}.\n' \
            '{}\n' \
            '{}\n' \
@@ -90,11 +89,7 @@ def generate_random_dates(n_days=None):
     start_day = np.random.randint(1, 29)
     start_date = date(start_year, start_month, start_day)
 
-    dates = []
-    for i in range(n_days):
-        dates.append(start_date + timedelta(days=i))
-
-    return dates
+    return [start_date + timedelta(days=i) for i in range(n_days)]
 
 
 def assert_output(fn, fn_inputs, fn_expected_outputs):
@@ -108,16 +103,19 @@ def assert_output(fn, fn_inputs, fn_expected_outputs):
     for input_name, input_value in fn_inputs.items():
         passed_in_unchanged = _is_equal(input_value, fn_inputs_passed_in[input_name])
 
-        assert passed_in_unchanged, 'Input parameter "{}" has been modified inside the function. ' \
-                                    'The function shouldn\'t modify the function parameters.'.format(input_name)
+        assert (
+            passed_in_unchanged
+        ), f"""Input parameter "{input_name}" has been modified inside the function. The function shouldn\'t modify the function parameters."""
 
     if len(fn_expected_outputs) == 1:
         fn_outputs[list(fn_expected_outputs)[0]] = fn_raw_out
     elif len(fn_expected_outputs) > 1:
-        assert type(fn_raw_out) == tuple,\
-            'Expecting function to return tuple, got type {}'.format(type(fn_raw_out))
-        assert len(fn_raw_out) == len(fn_expected_outputs),\
-            'Expected {} outputs in tuple, only found {} outputs'.format(len(fn_expected_outputs), len(fn_raw_out))
+        assert (
+            type(fn_raw_out) == tuple
+        ), f'Expecting function to return tuple, got type {type(fn_raw_out)}'
+        assert len(fn_raw_out) == len(
+            fn_expected_outputs
+        ), f'Expected {len(fn_expected_outputs)} outputs in tuple, only found {len(fn_raw_out)} outputs'
         for key_i, output_key in enumerate(fn_expected_outputs.keys()):
             fn_outputs[output_key] = fn_raw_out[key_i]
 
@@ -128,37 +126,37 @@ def assert_output(fn, fn_inputs, fn_expected_outputs):
         fn_expected_outputs)
 
     for fn_out, (out_name, expected_out) in zip(fn_outputs.values(), fn_expected_outputs.items()):
-        assert isinstance(fn_out, type(expected_out)),\
-            'Wrong type for output {}. Got {}, expected {}'.format(out_name, type(fn_out), type(expected_out))
+        assert isinstance(
+            fn_out, type(expected_out)
+        ), f'Wrong type for output {out_name}. Got {type(fn_out)}, expected {type(expected_out)}'
 
         if hasattr(expected_out, 'shape'):
-            assert fn_out.shape == expected_out.shape, \
-                'Wrong shape for output {}. Got {}, expected {}'.format(out_name, fn_out.shape, expected_out.shape)
+            assert (
+                fn_out.shape == expected_out.shape
+            ), f'Wrong shape for output {out_name}. Got {fn_out.shape}, expected {expected_out.shape}'
         elif hasattr(expected_out, '__len__'):
-            assert len(fn_out) == len(expected_out), \
-                'Wrong len for output {}. Got {}, expected {}'.format(out_name, len(fn_out), len(expected_out))
+            assert len(fn_out) == len(
+                expected_out
+            ), f'Wrong len for output {out_name}. Got {len(fn_out)}, expected {len(expected_out)}'
 
         if type(expected_out) == pd.DataFrame:
-            assert set(fn_out.columns) == set(expected_out.columns), \
-                'Incorrect columns for output {}\n' \
-                'COLUMNS:          {}\n' \
-                'EXPECTED COLUMNS: {}'.format(out_name, sorted(fn_out.columns), sorted(expected_out.columns))
+            assert set(fn_out.columns) == set(
+                expected_out.columns
+            ), f'Incorrect columns for output {out_name}\nCOLUMNS:          {sorted(fn_out.columns)}\nEXPECTED COLUMNS: {sorted(expected_out.columns)}'
 
             for column in expected_out.columns:
-                assert fn_out[column].dtype == expected_out[column].dtype, \
-                    'Incorrect type for output {}, column {}\n' \
-                    'Type:          {}\n' \
-                    'EXPECTED Type: {}'.format(out_name, column, fn_out[column].dtype, expected_out[column].dtype)
+                assert (
+                    fn_out[column].dtype == expected_out[column].dtype
+                ), f'Incorrect type for output {out_name}, column {column}\nType:          {fn_out[column].dtype}\nEXPECTED Type: {expected_out[column].dtype}'
 
             # Sort Columns
             fn_out = fn_out.sort_index(1)
             expected_out = expected_out.sort_index(1)
 
         if type(expected_out) in {pd.DataFrame, pd.Series}:
-            assert set(fn_out.index) == set(expected_out.index), \
-                'Incorrect indices for output {}\n' \
-                'INDICES:          {}\n' \
-                'EXPECTED INDICES: {}'.format(out_name, sorted(fn_out.index), sorted(expected_out.index))
+            assert set(fn_out.index) == set(
+                expected_out.index
+            ), f'Incorrect indices for output {out_name}\nINDICES:          {sorted(fn_out.index)}\nEXPECTED INDICES: {sorted(expected_out.index)}'
 
             # Sort Indices
             fn_out = fn_out.sort_index()

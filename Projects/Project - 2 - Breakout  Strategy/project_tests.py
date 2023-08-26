@@ -273,9 +273,6 @@ def test_find_outliers(fn):
             tickers),
         'ks_threshold': 0.5,
         'pvalue_threshold': 0.05}
-    fn_correct_outputs = OrderedDict([
-        (
-            'outliers',
-            set([tickers[2]]))])
+    fn_correct_outputs = OrderedDict([('outliers', {tickers[2]})])
 
     assert_output(fn, fn_inputs, fn_correct_outputs)

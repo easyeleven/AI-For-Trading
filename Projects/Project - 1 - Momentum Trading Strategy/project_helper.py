@@ -13,17 +13,12 @@ def _generate_stock_trace(prices):
 
 
 def _generate_traces(name_df_color_data):
-    traces = []
-
-    for name, df, color in name_df_color_data:
-        traces.append(go.Scatter(
-            name=name,
-            x=df.index,
-            y=df,
-            mode='line',
-            line={'color': color}))
-
-    return traces
+    return [
+        go.Scatter(
+            name=name, x=df.index, y=df, mode='line', line={'color': color}
+        )
+        for name, df, color in name_df_color_data
+    ]
 
 
 def plot_stock(prices, title):
@@ -97,5 +92,5 @@ def plot_shifted_returns(df_shited, df, title):
 
 
 def print_top(df, name, top_n=10):
-    print('{} Most {}:'.format(top_n, name))
+    print(f'{top_n} Most {name}:')
     print(', '.join(df.sum().sort_values(ascending=False).index[:top_n].values.tolist()))

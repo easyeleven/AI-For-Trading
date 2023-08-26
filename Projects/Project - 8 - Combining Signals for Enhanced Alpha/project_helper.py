@@ -49,12 +49,11 @@ class Sector(Classifier):
 def build_pipeline_engine(bundle_data, trading_calendar):
     pricing_loader = PricingLoader(bundle_data)
 
-    engine = SimplePipelineEngine(
+    return SimplePipelineEngine(
         get_loader=pricing_loader.get_loader,
         calendar=trading_calendar.all_sessions,
-        asset_finder=bundle_data.asset_finder)
-
-    return engine
+        asset_finder=bundle_data.asset_finder,
+    )
 
 
 def plot_tree_classifier(clf, feature_names=None):
@@ -85,7 +84,7 @@ def plot(xs, ys, labels, title='', x_label='', y_label=''):
 
 def rank_features_by_importance(importances, feature_names):
     indices = np.argsort(importances)[::-1]
-    max_feature_name_length = max([len(feature) for feature in feature_names])
+    max_feature_name_length = max(len(feature) for feature in feature_names)
 
     print('      Feature{space: <{padding}}      Importance'.format(padding=max_feature_name_length - 8, space=' '))
 

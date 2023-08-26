@@ -9,7 +9,9 @@ d = cmudict.dict()
 
 def syllable_count(word):
     try:
-        return np.min([len(list(y for y in x if y[-1].isdigit())) for x in d[word.lower()]])
+        return np.min(
+            [len([y for y in x if y[-1].isdigit()]) for x in d[word.lower()]]
+        )
     except KeyError:
         #if word not found in cmudict
         return _syllables(word)
